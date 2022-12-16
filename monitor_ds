@@ -16,6 +16,8 @@
 # limitations under the License.                                             #
 #--------------------------------------------------------------------------- #
 
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') monitor_ds" >> /var/log/one/debug.log
+
 dir="$1"
 
 vms=$(ls "$dir" | grep '^[0-9]\+$')

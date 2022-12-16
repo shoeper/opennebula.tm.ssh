@@ -14,6 +14,8 @@
 # limitations under the License.                                             #
 #--------------------------------------------------------------------------- #
 
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') ssh_utils.sh" >> /var/log/one/debug.log
+
 export LANG=C
 
 if [ -z "$ONE_LOCATION" ]; then
@@ -30,6 +32,7 @@ fi
 # Returns REPLICA_HOST attribute from DATASTORE template
 # ------------------------------------------------------------------------------
 function get_replica_host {
+    echo "ssh $(date '+%Y-%m-%d %H:%M:%S') get_replica_host" >> /var/log/one/debug.log
     local DS_ID=$1
 
     XPATH="${ONE_LOCAL_VAR}/remotes/datastore/xpath.rb --stdin"
@@ -42,6 +45,7 @@ function get_replica_host {
 # Computes md5sum for image or for image with snapshots
 # ------------------------------------------------------------------------------
 function md5sum_with_snaps {
+    echo "ssh $(date '+%Y-%m-%d %H:%M:%S') md5sum_with_snaps" >> /var/log/one/debug.log
     local IMG=$1
 
     if [ -f "${IMG}.md5sum" ]; then
@@ -71,6 +75,7 @@ function md5sum_with_snaps {
 # Compares md5sum of image on REPLICA_HOST and local
 # ------------------------------------------------------------------------------
 function repl_img_outdated {
+    echo "ssh $(date '+%Y-%m-%d %H:%M:%S') repl_img_outdated" >> /var/log/one/debug.log
     local IMG_PATH="$1"
     local REPLICA_HOST="$2"
 
@@ -90,6 +95,7 @@ EOF`
 # Rsync (tar|ssh) IMG_PATH to the REPLICA_HOST
 # ------------------------------------------------------------------------------
 function rsync_img_to_replica {
+    echo "ssh $(date '+%Y-%m-%d %H:%M:%S') rsync_img_to_replica" >> /var/log/one/debug.log
     local IMG_PATH="$1"
     local REPLICA_HOST="$2"
 
@@ -131,6 +137,7 @@ function size_mb {
 # Delete images from replica directory cache
 # ------------------------------------------------------------------------------
 function clean_cache() {
+    echo "ssh $(date '+%Y-%m-%d %H:%M:%S') clean_cache" >> /var/log/one/debug.log
     local CACHE_DIR=$1
     local MAX_MB=$REPLICA_MAX_SIZE_MB
     local CACHE_MB=$( size_mb $CACHE_DIR )
@@ -176,6 +183,7 @@ function clean_cache() {
 # Checks if recovery snapshot exists for given VM/DISK,
 # ------------------------------------------------------------------------------
 function recovery_snap_exists() {
+    echo "ssh $(date '+%Y-%m-%d %H:%M:%S') recovery_snap_exists" >> /var/log/one/debug.log
     local REPLICA_HOST=$1
     local DISK=$2
 
@@ -196,6 +204,7 @@ function recovery_snap_exists() {
 #
 # ------------------------------------------------------------------------------
 function create_base() {
+    echo "ssh $(date '+%Y-%m-%d %H:%M:%S') create_base" >> /var/log/one/debug.log
     local SRC_PATH=$1
     local DST_PATH=$2
     local COPY=${3:-cp}

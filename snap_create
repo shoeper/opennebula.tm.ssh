@@ -16,6 +16,8 @@
 # limitations under the License.                                             #
 #--------------------------------------------------------------------------- #
 
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') snap_create" >> /var/log/one/debug.log
+
 # snap_create host:parent_image snap_id vmid ds_id
 
 SRC=$1

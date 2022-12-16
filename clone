@@ -24,6 +24,8 @@
 #   - vmid is the id of the VM
 #   - dsid is the target datastore (0 is the system datastore)
 
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') clone" >> /var/log/one/debug.log
+
 SRC=$1
 DST=$2
 
@@ -88,7 +90,12 @@ SYS_DS_ID="${XPATH_ELEMENTS[j++]}"
 #-------------------------------------------------------------------------------
 # Check for REPLICA_HOST in DATASTORE TEMPLATE and exec ./$0.replica if found
 #-------------------------------------------------------------------------------
-REPLICA_HOST=$(get_replica_host $SYS_DS_ID)
+#REPLICA_HOST=$(get_replica_host $SYS_DS_ID)
+REPLICA_HOST="$DST_HOST"
+
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') clone REPLICA_HOST: $REPLICA_HOST" >> /var/log/one/debug.log
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') clone DST_HOST: $DST_HOST" >> /var/log/one/debug.log
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') clone SRC_HOST: $SRC_HOST" >> /var/log/one/debug.log
 
 if [ -n "$REPLICA_HOST" ]; then
     $0.replica $@ "$REPLICA_HOST"

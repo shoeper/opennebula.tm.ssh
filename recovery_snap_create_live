@@ -17,6 +17,8 @@
 #--------------------------------------------------------------------------- #
 # snap_create host:parent_image snap_id vmid ds_id
 
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') recovery_snap_create_live" >> /var/log/one/debug.log
+
 set -e -o pipefail
 
 VMID=$1

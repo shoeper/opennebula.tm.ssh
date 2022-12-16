@@ -25,6 +25,8 @@
 #   - dsid is the target datastore (0 is the system datastore
 #   - replica_host is an optional paramter when called from the tm/ssh/clone
 
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') ln.replica" >> /var/log/one/debug.log
+
 SRC=$1
 DST=$2
 

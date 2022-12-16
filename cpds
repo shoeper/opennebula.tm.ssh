@@ -24,6 +24,8 @@
 #   - snapid is the snapshot id. "-1" for none
 #   - dsid is the target datastore
 
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') cpds" >> /var/log/one/debug.log
+
 SRC=$1
 DST=$2
 SNAP_ID=$3

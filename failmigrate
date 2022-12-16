@@ -16,4 +16,6 @@
 # limitations under the License.                                             #
 #--------------------------------------------------------------------------- #
 
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') failmigrate" >> /var/log/one/debug.log
+
 exit 0

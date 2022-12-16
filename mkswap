@@ -23,6 +23,8 @@
 #   - vmid is the id of the VM
 #   - dsid is the target datastore (0 is the system datastore)
 
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') mkswap" >> /var/log/one/debug.log
+
 SIZE=$1
 DST=$2
 

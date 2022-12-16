@@ -25,6 +25,8 @@
 #  - template is the template of the VM in XML and base64 encoded
 #  - system_ds_mad flag if called by other SYSTEM_DS TM_MAD
 
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') premigrate" >> /var/log/one/debug.log
+
 SRC_HOST="$1"
 DST_HOST="$2"
 DST_PATH="$3"

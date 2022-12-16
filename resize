@@ -16,6 +16,8 @@
 # limitations under the License.                                             #
 #--------------------------------------------------------------------------- #
 
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') resize" >> /var/log/one/debug.log
+
 # resize image size vmid
 
 SRC=$1

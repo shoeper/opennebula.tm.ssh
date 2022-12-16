@@ -23,6 +23,8 @@
 #   - vmid is the id of the VM
 #   - 0 is the target datastore (system)
 
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') context" >> /var/log/one/debug.log
+
 ARGV=("$@")
 
 DS_ID="${ARGV[$(($#-1))]}"

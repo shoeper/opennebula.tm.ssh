@@ -16,5 +16,7 @@
 # limitations under the License.                                             #
 #--------------------------------------------------------------------------- #
 
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') monitor" >> /var/log/one/debug.log
+
 #The ssh system ds is monitored in each host using the monitor_ds.sh probe
 exit 0

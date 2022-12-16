@@ -16,6 +16,8 @@
 # limitations under the License.                                             #
 #--------------------------------------------------------------------------- #
 
+echo "ssh $(date '+%Y-%m-%d %H:%M:%S') snap_delete" >> /var/log/one/debug.log
+
 # snap_delete host:parent_image snap_id vmid ds_id
 
 SRC=$1
