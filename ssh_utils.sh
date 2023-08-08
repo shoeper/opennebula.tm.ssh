@@ -1,5 +1,5 @@
 # -------------------------------------------------------------------------- #
-# Copyright 2002-2022, OpenNebula Project, OpenNebula Systems                #
+# Copyright 2002-2023, OpenNebula Project, OpenNebula Systems                #
 #                                                                            #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may    #
 # not use this file except in compliance with the License. You may obtain    #
@@ -27,6 +27,8 @@ else
 fi
 
 . $SSH_RC
+
+source ${ONE_LOCAL_VAR}/remotes/scripts_common.sh
 
 # ------------------------------------------------------------------------------
 # Returns REPLICA_HOST attribute from DATASTORE template
@@ -111,8 +113,8 @@ function rsync_img_to_replica {
         LOCK="replica-$REPLICA_HOST-${IMG_PATH//\//-}"
         RSYNC_CMD=$(cat <<EOF
             set -e -o pipefail
-            tar -cSf - ${IMG_PATH}* | \
-                ssh $REPLICA_SSH_FE_OPTS $REPLICA_HOST 'tar xSf - -C / '
+            $TAR -cSf - ${IMG_PATH}* | \
+                ssh $REPLICA_SSH_FE_OPTS $REPLICA_HOST '$TAR -xSf - -C / '
 EOF
 )
         exclusive "$LOCK" "$LOCK_TIMEOUT" \
@@ -121,7 +123,7 @@ EOF
 
         ssh_exec_and_log_stdin $REPLICA_HOST \
             "clean_cache \"$(dirname $IMG_PATH)\"" \
-            "$ONE_LOCAL_VAR/remotes/tm/ssh/ssh_utils.sh" \
+            "$ONE_LOCAL_VAR/remotes/tm/custom_ssh/ssh_utils.sh" \
             "Failed to run clean_cache on $REPLICA_HOST"
     fi
 }
@@ -214,7 +216,7 @@ function create_base() {
     cd $DST_PATH.snap
     ln -f -s . $DST_FILE.snap ||:
     $COPY $SRC_PATH base
-    qemu-img create -b $DST_FILE.snap/base -f qcow2 base.1
+    qemu-img create -b $DST_FILE.snap/base -F qcow2 -f qcow2 base.1
     ln -f -s $DST_FILE.snap/base.1 $DST_PATH
     cd -
 }
